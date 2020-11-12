@@ -1,22 +1,14 @@
 function TodoInput ({ $app, onAddTodo }) {
-  this.$app = $app;
-  this.onAddTodo = onAddTodo;
-  this.$todoInput = document.createElement('input');
-  this.$app.appendChild(this.$todoInput);
-
-  this.addEventTodoInput = () => {
-    this.$todoInput.addEventListener('keydown', (event) => {
-      const { target: { value } } = event;
-      if (value.length > 0 && event.key === 'Enter') {
-        this.onAddTodo(value);
-        this.$todoInput.value = '';
-        this.$todoInput.focus();
-      }
-    })  
-  }
-
-  this.addEventTodoInput();
-  this.$todoInput.focus();
+  const $todoInput = document.createElement('input');
+  $app.appendChild($todoInput);
+  
+  $todoInput.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+      onAddTodo(event.target.value)
+      $todoInput.focus();
+    }
+  });
+  $todoInput.focus();  
 }
 
 export default TodoInput;

@@ -2,4 +2,4 @@ import App from './App.js';
 
 const $app = document.getElementById('root');
 
-App({ $app });
+new App({ $app });
