@@ -1,7 +1,6 @@
 import TodoInput from './TodoInput.js';
 import TodoList from './TodoList.js';
 
-// 화살표 함수는 constructor가 없네?
 function App ({ $app }) {
   this.$app = $app;
   this.state = [];

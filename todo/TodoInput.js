@@ -2,6 +2,7 @@ function TodoInput ({ $app, onAddTodo }) {
   this.$app = $app;
   this.onAddTodo = onAddTodo;
   this.$todoInput = document.createElement('input');
+  this.$app.appendChild(this.$todoInput);
 
   this.addEventTodoInput = () => {
     this.$todoInput.addEventListener('keydown', (event) => {
@@ -15,8 +16,6 @@ function TodoInput ({ $app, onAddTodo }) {
   }
 
   this.addEventTodoInput();
-
-  this.$app.appendChild(this.$todoInput);
   this.$todoInput.focus();
 }
 

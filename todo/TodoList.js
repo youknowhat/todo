@@ -5,20 +5,25 @@ function TodoList ({ $app, state }) {
 
   this.$app.appendChild(this.$todoList);
 
+  this.deleteTodo = (event) => {
+    event.target.parentNode.remove();
+  }
+
+  this.checkTodo = (event) => {
+    const { target } = event;
+    target.className = target.className.indexOf('completed') >= 0 ? '' : 'completed';
+  }
+
   this.render = () => {
-    this.state.forEach(({ text, isCompleted }) => {
-      const $todoItem = document.createElement('li');
-      const $deleteButton = document.createElement('button');
-
-      $todoItem.textContent = text;
-      $todoItem.className = isCompleted && 'completed';
-
-      $deleteButton.textContent = '삭제';
-      $deleteButton.className = 'delete';
-
-      this.$todoList.appendChild($todoItem);
-      $todoItem.appendChild($deleteButton);
-    })
+    this.$todoList.innerHTML =
+      this.state.reduce(
+        (htmlString, { text, isCompleted }, index) =>
+          htmlString +
+          `<li data-index=${index}><span data-action="toggleComplete" class=${
+            isCompleted ? 'complete' : ''
+          }>${text}</span><button data-action="delete">삭제</button></li>`,
+        ''
+      )
   }
 
   this.setState = (nextState) => {
