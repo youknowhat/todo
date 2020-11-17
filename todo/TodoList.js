@@ -6,6 +6,9 @@ function TodoList ({ $app, state = [] }) {
   this.delete = () => {
     $todoList.addEventListener('click', (event) => {
       const button = event.target;
+      const index = button.dataset.button;
+      const target = document.querySelector(`button[data-button="${index}"]`)
+      target.parentElement.remove();
     })
   }
 
@@ -13,10 +16,12 @@ function TodoList ({ $app, state = [] }) {
     $todoList.innerHTML = this.state
       .map(({ text, isCompleted }, index) => (
         isCompleted
-        ? `<li class="completed">${text}<button data-index-${index}>삭제</button></li>` 
-        : `<li>${text}<button data-index-${index}>삭제</button></li>`
+        ? `<li class="completed">${text}<button data-button"${index}">삭제</button></li>` 
+        : `<li>${text}<button data-button="${index}">삭제</button></li>`
       ))
       .join('')
+
+    this.delete();
   }
 
   this.setState = (nextState) => {
