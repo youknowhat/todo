@@ -5,6 +5,7 @@ function TodoInput ({ $app, onAddTodo }) {
   $todoInput.addEventListener('keydown', (event) => {
     if (event.key === 'Enter') {
       onAddTodo(event.target.value)
+      $todoInput.value = '';
       $todoInput.focus();
     }
   });
